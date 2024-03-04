@@ -1,0 +1,95 @@
+Program.Sub.ScreenSU.Start
+Program.Sub.ScreenSU.End
+
+Program.Sub.Preflight.Start
+
+Program.Sub.Preflight.End
+
+Program.Sub.Main.Start
+F.Intrinsic.Debug.InvokeDebugger
+F.Intrinsic.Debug.Stop
+
+F.Intrinsic.Control.CallSub(Update_uid)
+
+Program.Sub.Main.End
+
+Program.Sub.Update_UID.Start
+V.Local.sSQL.Declare(String)
+V.Local.sSQL2.Declare(String)
+V.Local.sState.Declare(String)
+V.Local.iUID.Declare(Long)
+
+f.ODBC.Misc.switchIHOPCreds("sa","gl0balsh0p")
+
+f.ODBC.Connection!con.OpenConnection(v.ambient.icon,v.Ambient.iuser,v.Ambient.iPass)
+F.Intrinsic.Debug.Stop
+
+
+V.Local.sSQL.Set("Select UID,CustNo from CUST_Master where CUST_Master.DelCust=0 and CUST_Master.InactiveCust=0  order by CustNo")
+
+F.ODBC.Connection!con.OpenLocalRecordsetRO("rstCust",V.Local.sSQL)
+F.Intrinsic.Control.DoUntil(V.ODBC.con!rstCust.EOF,=,True)
+	V.Local.iUID.Set(V.ODBC.con!rstCust.FieldVal!UID)
+	F.Intrinsic.String.Concat("Update CUST_Aux set UID=",V.ODBC.con!rstCust.FieldVal!UID," where CustNo='",V.ODBC.con!rstCust.FieldVal!CustNo,"'",V.Local.sSQL2)
+	F.ODBC.Connection!con.Execute(V.Local.sSQL2)
+	F.Intrinsic.String.Concat("Update CUST_BillTo set UID=",V.ODBC.con!rstCust.FieldVal!UID," where CustNo='",V.ODBC.con!rstCust.FieldVal!CustNo,"'",V.Local.sSQL2)
+	F.ODBC.Connection!con.Execute(V.Local.sSQL2)
+	F.Intrinsic.String.Concat("Update CUST_Comp_Proj set UID=",V.ODBC.con!rstCust.FieldVal!UID," where CustNo='",V.ODBC.con!rstCust.FieldVal!CustNo,"'",V.Local.sSQL2)
+	F.ODBC.Connection!con.Execute(V.Local.sSQL2)
+	F.Intrinsic.String.Concat("Update CUST_Contact set UID=",V.ODBC.con!rstCust.FieldVal!UID," where CustNo='",V.ODBC.con!rstCust.FieldVal!CustNo,"'",V.Local.sSQL2)
+	F.ODBC.Connection!con.Execute(V.Local.sSQL2)
+	F.Intrinsic.String.Concat("Update CUST_Custom set UID=",V.ODBC.con!rstCust.FieldVal!UID," where CustNo='",V.ODBC.con!rstCust.FieldVal!CustNo,"'",V.Local.sSQL2)
+	F.ODBC.Connection!con.Execute(V.Local.sSQL2)
+	F.Intrinsic.String.Concat("Update CUST_DataConv set UID=",V.ODBC.con!rstCust.FieldVal!UID," where CustNo='",V.ODBC.con!rstCust.FieldVal!CustNo,"'",V.Local.sSQL2)
+	F.ODBC.Connection!con.Execute(V.Local.sSQL2)
+	F.Intrinsic.String.Concat("Update CUST_HClass set UID=",V.ODBC.con!rstCust.FieldVal!UID," where CustNo='",V.ODBC.con!rstCust.FieldVal!CustNo,"'",V.Local.sSQL2)
+	F.ODBC.Connection!con.Execute(V.Local.sSQL2)
+	F.Intrinsic.String.Concat("Update CUST_Info set UID=",V.ODBC.con!rstCust.FieldVal!UID," where CustNo='",V.ODBC.con!rstCust.FieldVal!CustNo,"'",V.Local.sSQL2)
+	F.ODBC.Connection!con.Execute(V.Local.sSQL2)
+	F.Intrinsic.String.Concat("Update CUST_Install set UID=",V.ODBC.con!rstCust.FieldVal!UID," where CustNo='",V.ODBC.con!rstCust.FieldVal!CustNo,"'",V.Local.sSQL2)
+	F.ODBC.Connection!con.Execute(V.Local.sSQL2)
+	F.Intrinsic.String.Concat("Update CUST_Labels set UID=",V.ODBC.con!rstCust.FieldVal!UID," where CustNo='",V.ODBC.con!rstCust.FieldVal!CustNo,"'",V.Local.sSQL2)
+	F.ODBC.Connection!con.Execute(V.Local.sSQL2)
+	F.Intrinsic.String.Concat("Update CUST_Lic_Head set UID=",V.ODBC.con!rstCust.FieldVal!UID," where CustNo='",V.ODBC.con!rstCust.FieldVal!CustNo,"'",V.Local.sSQL2)
+	F.ODBC.Connection!con.Execute(V.Local.sSQL2)
+	F.Intrinsic.String.Concat("Update CUST_Lic_Lines set UID=",V.ODBC.con!rstCust.FieldVal!UID," where CustNo='",V.ODBC.con!rstCust.FieldVal!CustNo,"'",V.Local.sSQL2)
+	F.ODBC.Connection!con.Execute(V.Local.sSQL2)
+	F.Intrinsic.String.Concat("Update CUST_Multi_Loc set UID=",V.ODBC.con!rstCust.FieldVal!UID," where CustNo='",V.ODBC.con!rstCust.FieldVal!CustNo,"'",V.Local.sSQL2)
+	F.ODBC.Connection!con.Execute(V.Local.sSQL2)
+	F.Intrinsic.String.Concat("Update CUST_Notes set UID=",V.ODBC.con!rstCust.FieldVal!UID," where CustNo='",V.ODBC.con!rstCust.FieldVal!CustNo,"'",V.Local.sSQL2)
+	F.ODBC.Connection!con.Execute(V.Local.sSQL2)
+	F.Intrinsic.String.Concat("Update CUST_Quotes set UID=",V.ODBC.con!rstCust.FieldVal!UID," where CustNo='",V.ODBC.con!rstCust.FieldVal!CustNo,"'",V.Local.sSQL2)
+	F.ODBC.Connection!con.Execute(V.Local.sSQL2)
+	F.Intrinsic.String.Concat("Update CUST_Sales set UID=",V.ODBC.con!rstCust.FieldVal!UID," where CustNo='",V.ODBC.con!rstCust.FieldVal!CustNo,"'",V.Local.sSQL2)
+	F.ODBC.Connection!con.Execute(V.Local.sSQL2)
+	F.Intrinsic.String.Concat("Update CUST_SCall set UID=",V.ODBC.con!rstCust.FieldVal!UID," where CustNo='",V.ODBC.con!rstCust.FieldVal!CustNo,"'",V.Local.sSQL2)
+	F.ODBC.Connection!con.Execute(V.Local.sSQL2)
+	F.Intrinsic.String.Concat("Update CUST_Sched_Eval set UID=",V.ODBC.con!rstCust.FieldVal!UID," where CustNo='",V.ODBC.con!rstCust.FieldVal!CustNo,"'",V.Local.sSQL2)
+	F.ODBC.Connection!con.Execute(V.Local.sSQL2)
+	F.Intrinsic.String.Concat("Update CUST_ShipTo set UID=",V.ODBC.con!rstCust.FieldVal!UID," where CustNo='",V.ODBC.con!rstCust.FieldVal!CustNo,"'",V.Local.sSQL2)
+	F.ODBC.Connection!con.Execute(V.Local.sSQL2)
+	F.Intrinsic.String.Concat("Update CUST_Trip set UID=",V.ODBC.con!rstCust.FieldVal!UID," where CustNo='",V.ODBC.con!rstCust.FieldVal!CustNo,"'",V.Local.sSQL2)
+	F.ODBC.Connection!con.Execute(V.Local.sSQL2)
+	F.Intrinsic.String.Concat("Update CUST_Trip_Reject set UID=",V.ODBC.con!rstCust.FieldVal!UID," where CustNo='",V.ODBC.con!rstCust.FieldVal!CustNo,"'",V.Local.sSQL2)
+	F.ODBC.Connection!con.Execute(V.Local.sSQL2)
+	F.Intrinsic.String.Concat("Update CUST_WizLog set UID=",V.ODBC.con!rstCust.FieldVal!UID," where CustNo='",V.ODBC.con!rstCust.FieldVal!CustNo,"'",V.Local.sSQL2)
+	F.ODBC.Connection!con.Execute(V.Local.sSQL2)
+	F.Intrinsic.String.Concat("Update Emp_Sched set UID=",V.ODBC.con!rstCust.FieldVal!UID," where CustNo='",V.ODBC.con!rstCust.FieldVal!CustNo,"'",V.Local.sSQL2)
+	F.ODBC.Connection!con.Execute(V.Local.sSQL2)
+	F.Intrinsic.String.Concat("Update Misc_HWQ set UID=",V.ODBC.con!rstCust.FieldVal!UID," where CustNo='",V.ODBC.con!rstCust.FieldVal!CustNo,"'",V.Local.sSQL2)
+	F.ODBC.Connection!con.Execute(V.Local.sSQL2)
+	F.Intrinsic.String.Concat("Update SI_Issue_DL set UID=",V.ODBC.con!rstCust.FieldVal!UID," where CustNo='",V.ODBC.con!rstCust.FieldVal!CustNo,"'",V.Local.sSQL2)
+	F.ODBC.Connection!con.Execute(V.Local.sSQL2)
+	F.Intrinsic.String.Concat("Update SI_Master set UID=",V.ODBC.con!rstCust.FieldVal!UID," where CustNo='",V.ODBC.con!rstCust.FieldVal!CustNo,"'",V.Local.sSQL2)
+	F.ODBC.Connection!con.Execute(V.Local.sSQL2)
+	F.ODBC.con!rstCust.MoveNext
+F.Intrinsic.Control.Loop
+F.ODBC.con!rstCust.Close
+F.ODBC.Connection!con.Close
+
+Program.Sub.Update_UID.End
+
+Program.Sub.Comments.Start
+${$0$}$IHOP_UpdateUID$}$ENM$}$12/03/14 8:15:01 AM
+Program.Sub.Comments.End
+
